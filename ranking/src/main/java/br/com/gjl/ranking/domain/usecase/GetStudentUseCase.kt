@@ -17,6 +17,8 @@ class GetStudentUseCase(private val rankingRepository: RankingRepository) {
 }
 
 private suspend fun orderedStudentByDescendingScore(rankingRepository: RankingRepository) =
-    rankingRepository.getStudent().sortedByDescending { it.score }
-
+    rankingRepository.getStudent().sortedWith(compareByDescending<Student> { it.score }
+        .thenBy { it.firstName }
+        .thenBy { it.lastName }
+    )
 

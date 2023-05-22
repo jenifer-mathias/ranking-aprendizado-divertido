@@ -11,176 +11,17 @@
     <include
         android:id="@+id/toolbarRanking"
         layout="@layout/toolbar"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="wrap_content"
+    <include
+        android:id="@+id/ranking_top_3"
+        layout="@layout/item_student_ranking"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/recyclerView"
-        app:layout_constraintStart_toStartOf="@+id/recyclerView"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarRanking">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/first_profile_img_ranking"
-            android:layout_width="62dp"
-            android:layout_height="72dp"
-            android:layout_margin="4dp"
-            android:layout_marginBottom="4dp"
-            android:src="@drawable/profile_img_student"
-            app:layout_constraintBottom_toTopOf="@+id/first_name_student"
-            app:layout_constraintEnd_toEndOf="@+id/first_name_student"
-            app:layout_constraintStart_toStartOf="@+id/first_name_student"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/profile_img_student" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/second_profile_img_ranking"
-            android:layout_width="62dp"
-            android:layout_height="72dp"
-            android:layout_margin="4dp"
-            android:layout_marginBottom="4dp"
-            android:src="@drawable/profile_img_student"
-            app:layout_constraintBottom_toTopOf="@+id/second_name_student"
-            app:layout_constraintEnd_toEndOf="@+id/second_name_student"
-            app:layout_constraintStart_toStartOf="@+id/second_name_student"
-            tools:src="@drawable/profile_img_student" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/second_name_student"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_marginBottom="4dp"
-            android:text="Ana Vitoria"
-            android:textAllCaps="true"
-            android:textColor="@color/primaryBlue"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/second_serie_student"
-            app:layout_constraintEnd_toEndOf="@+id/second_serie_student"
-            app:layout_constraintHorizontal_bias="0.54"
-            app:layout_constraintStart_toStartOf="@+id/second_serie_student"
-            tools:text="Ana Vitoria" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/second_serie_student"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:text="2° B"
-            android:textAllCaps="true"
-            android:textColor="@color/primaryBlue"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/second_podium"
-            app:layout_constraintEnd_toEndOf="@+id/second_podium"
-            app:layout_constraintStart_toStartOf="@+id/second_podium"
-            tools:text="2° B" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/third_serie_student"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:text="2° A"
-            android:textAllCaps="true"
-            android:textColor="@color/primaryBlue"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/third_podium"
-            app:layout_constraintEnd_toEndOf="@+id/third_podium"
-            app:layout_constraintStart_toStartOf="@+id/third_podium"
-            tools:text="2° A" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/third_profile_img_ranking"
-            android:layout_width="62dp"
-            android:layout_height="72dp"
-            android:layout_margin="4dp"
-            android:layout_marginBottom="4dp"
-            android:src="@drawable/profile_img_student"
-            app:layout_constraintBottom_toTopOf="@+id/third_name_student"
-            app:layout_constraintEnd_toEndOf="@+id/third_name_student"
-            app:layout_constraintStart_toStartOf="@+id/third_name_student"
-            tools:src="@drawable/profile_img_student" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/third_name_student"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_marginBottom="4dp"
-            android:text="Douglas Santos"
-            android:textAllCaps="true"
-            android:textColor="@color/primaryBlue"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/third_serie_student"
-            app:layout_constraintEnd_toEndOf="@+id/third_serie_student"
-            app:layout_constraintHorizontal_bias="0.493"
-            app:layout_constraintStart_toStartOf="@+id/third_serie_student"
-            tools:text="Douglas Santos" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/first_serie_student"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_marginBottom="4dp"
-            android:text="2° C"
-            android:textAllCaps="true"
-            android:textColor="@color/primaryBlue"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/first_podium"
-            app:layout_constraintEnd_toEndOf="@+id/first_podium"
-            app:layout_constraintStart_toStartOf="@+id/first_podium"
-            tools:text="2° C" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/first_name_student"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_marginBottom="4dp"
-            android:text="Maria Elisa"
-            android:textAllCaps="true"
-            android:textColor="@color/primaryBlue"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/first_serie_student"
-            app:layout_constraintEnd_toEndOf="@+id/first_serie_student"
-            app:layout_constraintStart_toStartOf="@+id/first_serie_student"
-            tools:text="Maria Elisa" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/second_podium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/second_ranking"
-            app:layout_constraintBottom_toBottomOf="@+id/first_podium"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/first_podium"
-            android:layout_width="106dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/first_ranking"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/second_podium" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/third_podium"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/third_ranking"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/first_podium" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbarRanking" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -194,7 +35,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        tools:listitem="@layout/item_student" />
+        app:layout_constraintTop_toBottomOf="@+id/ranking_top_3"
+        tools:listitem="@layout/item_student_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

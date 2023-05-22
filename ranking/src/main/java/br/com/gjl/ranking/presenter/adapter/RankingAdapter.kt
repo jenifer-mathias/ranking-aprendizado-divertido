@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.gjl.ranking.R
-import br.com.gjl.ranking.databinding.ItemStudentBinding
+import br.com.gjl.ranking.databinding.ItemStudentListBinding
 import br.com.gjl.ranking.domain.model.Student
 import com.bumptech.glide.Glide
 
@@ -14,7 +14,7 @@ class RankingAdapter(private val student: List<Student>, val context: Context) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {
         val itemView =
-            ItemStudentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemStudentListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return StudentViewHolder(itemView)
     }
 
@@ -41,7 +41,7 @@ class RankingAdapter(private val student: List<Student>, val context: Context) :
 
     override fun getItemCount() = student.size
 
-    inner class StudentViewHolder(val binding: ItemStudentBinding) :
+    inner class StudentViewHolder(val binding: ItemStudentListBinding) :
         RecyclerView.ViewHolder(binding.root)
 
 }

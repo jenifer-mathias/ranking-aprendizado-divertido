@@ -1,0 +1,70 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - '*'
+    paths-ignore:
+      - 'README.md'
+      - 'CHANGELOG'
+      - '**/.gitignore'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v2
+
+      - name: Configurar JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+
+      - name: Configurar o ambiente Android
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+          android-sdk: ${{ secrets.ANDROID_HOME }}
+          emulator-version: '30'
+
+      - name: Build do projeto
+        run: ./gradlew assemble
+
+      - name: Executar análise de segurança com Fortify
+        run: |
+          # Comando para executar a análise de segurança com Fortify
+          # Substitua pelo comando específico do Fortify para o seu projeto
+          fortify-analyze
+
+      - name: Executar linting
+        run: ./gradlew lint
+
+      - name: Executar testes de unidade e cobertura com Jacoco
+        run: ./gradlew test jacocoTestReport
+
+      - name: Verificar cobertura mínima
+        run: |
+          # Lógica para verificar a cobertura mínima de 50%
+          # Substitua pelo código específico para o seu projeto
+          if [ "$(cat app/build/reports/jacoco/test/html/index.html | grep -oP 'span class="percentage">\K(\d+(?:\.\d+)?)')" \< "50" ]; then
+            echo "Cobertura de código inferior a 50%."
+            exit 1
+          fi
+
+      - name: Publicar versão de teste como Release
+        run: |
+          mkdir release
+          cp app/build/outputs/apk/debug/app-debug.apk release/app-test.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publicar versão final como Release (branch develop)
+        if: github.ref == 'refs/heads/develop'
+        run: |
+          mkdir release
+          cp app/build/outputs/apk/debug/app-debug.apk release/app-release.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

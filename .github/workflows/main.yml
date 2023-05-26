@@ -22,7 +22,6 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '11'
-          distribution: ''
 
       - name: Configurar o ambiente Android
         uses: actions/setup-java@v1

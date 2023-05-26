@@ -23,13 +23,6 @@ jobs:
         with:
           java-version: '11'
 
-      - name: Configurar o ambiente Android
-        uses: actions/setup-java@v1
-        with:
-          java-version: '11'
-          android-sdk: ${{ secrets.ANDROID_HOME }}
-          emulator-version: '30'
-
       - name: Build do projeto
         run: ./gradlew assemble
 
@@ -44,6 +37,9 @@ jobs:
 
       - name: Executar testes de unidade e cobertura com Jacoco
         run: ./gradlew test jacocoTestReport
+
+      - name: Verificar commits convencionais
+        run: npx commitlint --from=HEAD~1 --to=HEAD --verbose
 
       - name: Verificar cobertura mínima
         run: |

@@ -11,24 +11,11 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout do código
         uses: actions/checkout@v2
-
-      - name: Configurar JDK
-        uses: actions/setup-java@v2
-        with:
-          java-version: '11'
-
-      - name: Configurar o ambiente Android
-        uses: actions/setup-java@v1
-        with:
-          java-version: '11'
-          android-sdk: ${{ secrets.ANDROID_HOME }}
-          emulator-version: '30'
 
       - name: Build do projeto
         run: ./gradlew assemble

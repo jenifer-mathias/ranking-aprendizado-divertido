@@ -15,7 +15,7 @@ jobs:
 
       - name: Ler versão do arquivo VERSIONS
         id: read_version
-        run: echo "::set-env name=VERSION::$(cat VERSIONS)"
+        run: echo "VERSION=$(cat VERSIONS)" >> $GITHUB_ENV
 
       - name: Exibir versão
         run:

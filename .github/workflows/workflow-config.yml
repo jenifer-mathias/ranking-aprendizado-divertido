@@ -1,0 +1,3 @@
+linting: true
+fortify: true
+unit-tests: true

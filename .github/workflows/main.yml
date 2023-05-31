@@ -1,9 +1,9 @@
-name: CI/CD
+name: CI/CD - Main
 
 on:
   push:
     branches:
-      - '*'
+      - main
     paths-ignore:
       - 'README.md'
       - 'CHANGELOG'
@@ -17,28 +17,54 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v2
 
+      - name: Ler versão do arquivo VERSIONS
+        id: read_version
+        run: echo "::set-env name=VERSION::$(cat VERSIONS)"
+
+      - name: Exibir versão
+        run:
+          echo "Versão: ${{ env.VERSION }}"
+
       - name: Build do projeto
-        run: ./gradlew assemble
+        run: |
+         echo "Usando a versão $VERSION para o build"
+         ./gradlew assemble -Pversion=${{ env.VERSION }}
 
       - name: Executar análise de segurança com Fortify
         run: |
-          # Comando para executar a análise de segurança com Fortify
-          # Substitua pelo comando específico do Fortify para o seu projeto
-          fortify-analyze
+          if ${{ steps.workflow-config.outputs.config.fortify == 'true' }}; then
+           # Comando para executar a análise de segurança com Fortify
+           # Substitua pelo comando específico do Fortify para o seu projeto
+           fortify-analyze
+          else
+           echo "Fortify está desativado. Ignorando etapa."
+          fi
 
       - name: Executar linting
-        run: ./gradlew lint
+        run: |
+          if ${{ steps.workflow-config.outputs.config.linting == 'true' }}; then
+           ./gradlew lint
+          else
+           echo "Linting está desativado. Ignorando etapa."
+          fi
 
       - name: Executar testes de unidade e cobertura com Jacoco
-        run: ./gradlew test jacocoTestReport
+        run: |
+          if ${{ steps.workflow-config.outputs.config.unit-tests == 'true' }}; then
+            ./gradlew test jacocoTestReport
+          else
+            echo "Testes de unidade estão desativados. Ignorando etapa."
+          fi
+
 
       - name: Verificar cobertura mínima
+        if: steps.workflow-config.outputs.config.unit-tests == 'true'
         run: |
           # Lógica para verificar a cobertura mínima de 50%
           # Substitua pelo código específico para o seu projeto
           if [ "$(cat app/build/reports/jacoco/test/html/index.html | grep -oP 'span class="percentage">\K(\d+(?:\.\d+)?)')" \< "50" ]; then
-            echo "Cobertura de código inferior a 50%."
-            exit 1
+           echo "Cobertura de código inferior a 50%."
+           exit 1
           fi
 
       - name: Publicar versão de teste como Release

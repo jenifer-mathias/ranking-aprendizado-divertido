@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/rankingFragment"
-        android:name="br.com.gjl.ranking.presenter.RankingFragment"
+        android:name="br.com.gjl.rankingcore.presenter.RankingFragment"
         android:label="RankingFragment"
         tools:layout="@layout/fragment_ranking">
         <action

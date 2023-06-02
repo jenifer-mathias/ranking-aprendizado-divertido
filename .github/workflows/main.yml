@@ -1,0 +1,73 @@
+name: CI/CD - Main
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+      - 'CHANGELOG'
+      - '**/.gitignore'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v2
+
+      - name: Ler versão do arquivo VERSIONS
+        id: read_version
+        run: echo "::set-env name=VERSION::$(cat VERSIONS)"
+
+      - name: Exibir versão
+        run:
+          echo "Versão: ${{ env.VERSION }}"
+
+      - name: Build do projeto
+        run: |
+         echo "Usando a versão $VERSION para o build"
+         ./gradlew assemble -Pversion=${{ env.VERSION }}
+
+      - name: Executar linting
+        run: |
+          if ${{ steps.workflow-config.outputs.config.linting == 'true' }}; then
+           ./gradlew lint
+          else
+           echo "Linting está desativado. Ignorando etapa."
+          fi
+
+      - name: Executar testes de unidade e cobertura com Jacoco
+        run: |
+          if ${{ steps.workflow-config.outputs.config.unit-tests == 'true' }}; then
+            ./gradlew test jacocoTestReport
+          else
+            echo "Testes de unidade estão desativados. Ignorando etapa."
+          fi
+
+
+      - name: Verificar cobertura mínima
+        if: steps.workflow-config.outputs.config.unit-tests == 'true'
+        run: |
+          # Lógica para verificar a cobertura mínima de 50%
+          # Substitua pelo código específico para o seu projeto
+          if [ "$(cat app/build/reports/jacoco/test/html/index.html | grep -oP 'span class="percentage">\K(\d+(?:\.\d+)?)')" \< "50" ]; then
+           echo "Cobertura de código inferior a 50%."
+           exit 1
+          fi
+
+      - name: Publicar versão Release
+        run: |
+          mkdir release
+          cp app/build/outputs/apk/debug/app-debug.apk release/app-test.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publicar versão final como Release (branch develop)
+        if: github.ref == 'refs/heads/develop'
+        run: |
+          mkdir release
+          cp app/build/outputs/apk/debug/app-debug.apk release/app-release.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

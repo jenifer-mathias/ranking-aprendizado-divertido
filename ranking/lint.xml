@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+
+    <issue id="all" severity="warning" />
+
+    <issue id="NewApi" severity="error" />
+    <issue id="UnusedResources" severity="warning" />
+
+    <issue id="UnusedResources">
+        <ignore path="res/raw/*" />
+    </issue>
+
+    <issue id="UnusedIds">
+        <ignore path="**/R.java" />
+    </issue>
+
+    <issue id="UnusedIds">
+        <ignore regexp="true">
+            <![CDATA[.*// lint-disable UnusedIds.*]]>
+        </ignore>
+    </issue>
+
+</lint>

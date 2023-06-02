@@ -26,12 +26,6 @@ jobs:
           echo "Usando a versão $VERSION para o build"
           ./gradlew assemble -Pversion=${{ env.VERSION }}
 
-      - name: Executar análise de segurança com Fortify
-        run: |
-          # Comando para executar a análise de segurança com Fortify
-          # Substitua pelo comando específico do Fortify para o seu projeto
-          fortify-analyze
-
       - name: Executar linting
         run: ./gradlew lint
 

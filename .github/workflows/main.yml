@@ -30,16 +30,6 @@ jobs:
          echo "Usando a versão $VERSION para o build"
          ./gradlew assemble -Pversion=${{ env.VERSION }}
 
-      - name: Executar análise de segurança com Fortify
-        run: |
-          if ${{ steps.workflow-config.outputs.config.fortify == 'true' }}; then
-           # Comando para executar a análise de segurança com Fortify
-           # Substitua pelo comando específico do Fortify para o seu projeto
-           fortify-analyze
-          else
-           echo "Fortify está desativado. Ignorando etapa."
-          fi
-
       - name: Executar linting
         run: |
           if ${{ steps.workflow-config.outputs.config.linting == 'true' }}; then

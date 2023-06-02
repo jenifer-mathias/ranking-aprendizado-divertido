@@ -28,9 +28,11 @@ jobs:
 
       - name: Executar linting
         run: ./gradlew lint
+        continue-on-error: false
 
       - name: Executar testes de unidade e cobertura com Jacoco
         run: ./gradlew test jacocoTestReport
+        continue-on-error: true
 
       - name: Verificar cobertura mínima
         run: |
@@ -40,6 +42,7 @@ jobs:
             echo "Cobertura de código inferior a 50%."
             exit 1
           fi
+        continue-on-error: false
 
       - name: Publicar versão snapshot
         run: |
@@ -47,3 +50,10 @@ jobs:
           cp app/build/outputs/apk/debug/app-debug.apk release/app-snapshot.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Verificar status dos passos anteriores
+        run: |
+          if [ ${{ job.status }} != "success" ]; then
+            echo "Um ou mais passos falharam:"
+            exit 1
+          fi

@@ -34,7 +34,7 @@ android {
     }
 
     lintOptions {
-        baseline file("lint.xml")
+        baseline file("lint-baseline.xml")
         abortOnError false
         htmlOutput file("reports/lint-report.html")
     }

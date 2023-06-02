@@ -1,11 +1,6 @@
 <resources>
-
     <style name="Theme.Ranking.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
-    <style name="Theme.Ranking.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.Ranking.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

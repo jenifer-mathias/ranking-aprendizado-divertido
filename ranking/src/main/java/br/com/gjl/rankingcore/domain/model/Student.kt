@@ -1,4 +1,4 @@
-package br.com.gjl.ranking.domain.model
+package br.com.gjl.rankingcore.domain.model
 
 data class Student(
     val firstName: String,

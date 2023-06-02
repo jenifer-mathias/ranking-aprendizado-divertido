@@ -1,12 +1,11 @@
-package br.com.gjl.ranking.data.model
+package br.com.gjl.rankingcore.data.model
 
-import br.com.gjl.ranking.data.api.RankingApi
+import br.com.gjl.rankingcore.data.api.RankingApi
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.create
 
 //object RetrofitService {
 //    private val moshi = Moshi.Builder().build()

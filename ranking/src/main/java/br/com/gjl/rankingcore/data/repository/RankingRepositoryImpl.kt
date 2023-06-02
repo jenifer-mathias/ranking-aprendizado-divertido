@@ -1,8 +1,8 @@
-package br.com.gjl.ranking.data.repository
+package br.com.gjl.rankingcore.data.repository
 
-import br.com.gjl.ranking.data.api.RankingApi
-import br.com.gjl.ranking.data.model.toStudent
-import br.com.gjl.ranking.domain.model.Student
+import br.com.gjl.rankingcore.data.api.RankingApi
+import br.com.gjl.rankingcore.data.model.toStudent
+import br.com.gjl.rankingcore.domain.model.Student
 
 class RankingRepositoryImpl(private val service: RankingApi) : RankingRepository {
 

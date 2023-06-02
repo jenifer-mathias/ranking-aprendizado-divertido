@@ -1,0 +1,59 @@
+name: CI/CD - Other Branches
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v2
+
+      - name: Ler versão do arquivo VERSIONS
+        id: read_version
+        run: echo "VERSION=$(cat VERSIONS)" >> $GITHUB_ENV
+
+      - name: Exibir versão
+        run: |
+          echo "Versão: $VERSION"
+
+      - name: Build do projeto
+        run: |
+          echo "Usando a versão $VERSION para o build"
+          ./gradlew assemble -Pversion=${{ env.VERSION }}
+
+      - name: Executar linting
+        run: ./gradlew lint
+        continue-on-error: true
+
+      - name: Executar testes de unidade e cobertura com Jacoco
+        run: ./gradlew test jacocoTestReport
+        continue-on-error: true
+
+      - name: Verificar cobertura mínima
+        run: |
+          # Lógica para verificar a cobertura mínima de 50%
+          # Substitua pelo código específico para o seu projeto
+          if [ "$(cat app/build/reports/jacoco/test/html/index.html | grep -oP 'span class=\"percentage\">\K(\d+(?:\.\d+)?)')" \< "50" ]; then
+            echo "Cobertura de código inferior a 50%."
+            exit 1
+          fi
+        continue-on-error: true
+
+      - name: Publicar versão snapshot
+        run: |
+          mkdir release
+          cp app/build/outputs/apk/debug/app-debug.apk release/app-snapshot.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Verificar status dos passos anteriores
+        run: |
+          if [ ${{ job.status }} != "success" ]; then
+            echo "Um ou mais passos falharam:"
+            exit 1
+          fi

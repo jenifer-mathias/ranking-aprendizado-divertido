@@ -1,4 +1,4 @@
-package br.com.gjl.ranking.presenter
+package br.com.gjl.rankingcore.presenter
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -13,10 +13,10 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import br.com.gjl.ranking.R
-import br.com.gjl.ranking.databinding.FragmentRankingBinding
-import br.com.gjl.ranking.domain.model.Student
-import br.com.gjl.ranking.presenter.adapter.RankingAdapter
+import br.com.gjl.rankingcore.R
+import br.com.gjl.rankingcore.databinding.FragmentRankingBinding
+import br.com.gjl.rankingcore.domain.model.Student
+import br.com.gjl.rankingcore.presenter.adapter.RankingAdapter
 import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

@@ -1,4 +1,4 @@
-package br.com.gjl.ranking.utils
+package br.com.gjl.rankingcore.utils
 
 import android.view.LayoutInflater
 import android.view.View

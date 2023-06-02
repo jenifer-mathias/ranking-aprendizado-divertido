@@ -1,7 +1,7 @@
-package br.com.gjl.ranking.domain.usecase
+package br.com.gjl.rankingcore.domain.usecase
 
-import br.com.gjl.ranking.data.repository.RankingRepository
-import br.com.gjl.ranking.domain.model.Student
+import br.com.gjl.rankingcore.data.repository.RankingRepository
+import br.com.gjl.rankingcore.domain.model.Student
 
 sealed class GetStudentResult {
     data class Success(val students: List<Student>) : GetStudentResult()

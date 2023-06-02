@@ -1,4 +1,4 @@
-package br.com.gjl.ranking.data.network
+package br.com.gjl.rankingcore.data.network
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

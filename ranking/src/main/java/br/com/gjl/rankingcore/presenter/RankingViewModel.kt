@@ -1,12 +1,12 @@
-package br.com.gjl.ranking.presenter
+package br.com.gjl.rankingcore.presenter
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.gjl.ranking.domain.model.Student
-import br.com.gjl.ranking.domain.usecase.GetStudentResult
-import br.com.gjl.ranking.domain.usecase.GetStudentUseCase
+import br.com.gjl.rankingcore.domain.model.Student
+import br.com.gjl.rankingcore.domain.usecase.GetStudentResult
+import br.com.gjl.rankingcore.domain.usecase.GetStudentUseCase
 import kotlinx.coroutines.launch
 
 class RankingViewModel(private val getStudentUseCase: GetStudentUseCase) : ViewModel() {

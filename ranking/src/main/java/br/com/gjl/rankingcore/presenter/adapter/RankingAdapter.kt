@@ -1,12 +1,12 @@
-package br.com.gjl.ranking.presenter.adapter
+package br.com.gjl.rankingcore.presenter.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import br.com.gjl.ranking.R
-import br.com.gjl.ranking.databinding.ItemStudentListBinding
-import br.com.gjl.ranking.domain.model.Student
+import br.com.gjl.rankingcore.R
+import br.com.gjl.rankingcore.databinding.ItemStudentListBinding
+import br.com.gjl.rankingcore.domain.model.Student
 import com.bumptech.glide.Glide
 
 class RankingAdapter(private val student: List<Student>, val context: Context) :

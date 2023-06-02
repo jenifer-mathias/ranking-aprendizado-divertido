@@ -1,6 +1,6 @@
-package br.com.gjl.ranking.data.model
+package br.com.gjl.rankingcore.data.model
 
-import br.com.gjl.ranking.domain.model.Student
+import br.com.gjl.rankingcore.domain.model.Student
 import com.squareup.moshi.Moshi
 
 object BuilderMoshi {

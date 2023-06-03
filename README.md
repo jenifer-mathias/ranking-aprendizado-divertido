@@ -1,6 +1,6 @@
 # Módulo do Ranking: aplicativo 'Aprendizado Divertido'
 
-## Used Api: 
+## Used Api: https://github.com/jenifer-mathias/student-api
 
 ## Tools and main concepts:
 

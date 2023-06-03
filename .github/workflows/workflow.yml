@@ -57,3 +57,12 @@ jobs:
             echo "Um ou mais passos falharam:"
             exit 1
           fi
+
+      - name: Verificar se a versão snapshot foi gerada
+        run: |
+          if [ -f release/app-snapshot.apk ]; then
+            echo "A versão snapshot foi gerada com sucesso!"
+          else
+            echo "Falha ao gerar a versão snapshot."
+            exit 1
+          fi

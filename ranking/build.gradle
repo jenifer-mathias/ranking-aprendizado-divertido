@@ -61,17 +61,17 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['test']) {
             "src/test/java"
     ]
 
-    classDirectories.from = files([
+    classDirectories.setFrom(files([
             fileTree(dir: "$buildDir/intermediates/javac/debug", includes: ["**/*.class"]),
             fileTree(dir: "$buildDir/tmp/kotlin-classes/debug", includes: ["**/*.class"])
-    ])
+    ]))
 
-    sourceDirectories.from = files(coverageSourceDirs)
+    sourceDirectories.setFrom(files(coverageSourceDirs))
 
-    executionData.from = fileTree(dir: "$buildDir", includes: [
+    executionData.setFrom(fileTree(dir: "$buildDir", includes: [
             "jacoco/test.exec",
             "outputs/code-coverage/connected/*coverage.ec"
-    ])
+    ]))
 }
 
 dependencies {
@@ -98,6 +98,10 @@ dependencies {
 
     implementation "io.insert-koin:koin-core:3.1.2"
     implementation "io.insert-koin:koin-android:3.1.2"
+
+    implementation 'org.jacoco:org.jacoco.core:0.8.7'
+    implementation 'org.jacoco:org.jacoco.report:0.8.7'
+    implementation 'org.jacoco:org.jacoco.agent:0.8.7'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

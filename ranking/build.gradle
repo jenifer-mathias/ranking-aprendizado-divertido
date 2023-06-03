@@ -1,8 +1,10 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'jacoco'
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
+    id 'jacoco'
+}
 
 android {
     compileSdkVersion 33
@@ -38,7 +40,34 @@ android {
         abortOnError false
         htmlOutput file("reports/lint-report.html")
     }
+}
 
+jacoco {
+    toolVersion = "0.8.7"
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+}
+
+tasks.register("jacocoTestReport", JacocoReport) {
+    dependsOn("test")
+    reports {
+        xml.enabled = true
+        html.enabled = false
+    }
+
+    def coverageSourceDirs = [
+            "src/main/java",
+            "src/test/java"
+    ]
+
+    classDirectories.setFrom(files(sourceSets.main.java.output, sourceSets.test.java.output))
+    sourceDirectories.setFrom(files(coverageSourceDirs))
+    executionData.setFrom(fileTree(dir: project.buildDir, includes: [
+            "jacoco/test.exec",
+            "outputs/code-coverage/connected/*coverage.ec"
+    ]))
 }
 
 dependencies {

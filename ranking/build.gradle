@@ -1,8 +1,10 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'jacoco'
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
+    id 'jacoco'
+}
 
 android {
     compileSdkVersion 33
@@ -38,7 +40,38 @@ android {
         abortOnError false
         htmlOutput file("reports/lint-report.html")
     }
+}
 
+jacoco {
+    version = "0.8.7"
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: ['test']) {
+    reports {
+        xml.enabled = true
+        html.enabled = false
+    }
+
+    def coverageSourceDirs = [
+            "src/main/java",
+            "src/test/java"
+    ]
+
+    classDirectories.setFrom(files([
+            fileTree(dir: "$buildDir/intermediates/javac/debug", includes: ["**/*.class"]),
+            fileTree(dir: "$buildDir/tmp/kotlin-classes/debug", includes: ["**/*.class"])
+    ]))
+
+    sourceDirectories.setFrom(files(coverageSourceDirs))
+
+    executionData.setFrom(fileTree(dir: "$buildDir", includes: [
+            "jacoco/test.exec",
+            "outputs/code-coverage/connected/*coverage.ec"
+    ]))
 }
 
 dependencies {
@@ -65,6 +98,10 @@ dependencies {
 
     implementation "io.insert-koin:koin-core:3.1.2"
     implementation "io.insert-koin:koin-android:3.1.2"
+
+    implementation 'org.jacoco:org.jacoco.core:0.8.7'
+    implementation 'org.jacoco:org.jacoco.report:0.8.7'
+    implementation 'org.jacoco:org.jacoco.agent:0.8.7'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

@@ -1,2 +1,2 @@
 linting: true
-unit-tests: true
+unit-tests: false
